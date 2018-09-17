@@ -1,6 +1,8 @@
 
 <script>
   var xhr = new XMLHttpRequest();
+  
+  
   xhr.onreadystatechange = function() {
     if (xhr.readyState === xhr.DONE) {
       if (xhr.status === 200 || xhr.status === 201) {
@@ -10,6 +12,20 @@
       }
     }
   };
+  
+  /*
+  onreadystatechange 대신에  onload 와 onerror 로 성공과 실패 구별 가능
+  */
+  
+  xhr.onload = function() {
+    if (xhr.status === 200 || xhr.status === 201) {
+      console.log(xhr.responseText);
+    }
+  };
+  xhr.onerror = function() {
+    console.error(xhr.responseText);
+  };
+  
   xhr.open('GET', 'https://www.zerocho.com/api/get');
   xhr.send();
 </script>
